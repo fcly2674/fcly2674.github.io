@@ -6,7 +6,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-image: url('https://telegraph-image-c2o.pages.dev/file/774c646be6a0d519838ad.png');
+    background-image: url('../img/backgroud.png');
     background-repeat: no-repeat;
     background-size: 1920px 1080px;
 
