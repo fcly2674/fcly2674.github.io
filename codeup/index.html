@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>调调你的Python</title>
     <link rel="icon" href="icon.jpg">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/codeup.css">
+    <script src="../js/codeup.js"></script>
 </head>
 
 <body>
@@ -20,14 +22,9 @@
             <a href="/register">注册</a>
         </nav>
     </header>
-    <main class="container">
-        <h2>欢迎来到调调你的Python</h2>
-        <h3>实现基于GET请求的Python代码调用</h3>
-        <p>通过给出链接+连接参数的形式调用此程序的API</p>
-        <p>实现用户私人库储存代码、共享库查看你所需要的代码</p>
-        <div class="box">
-            <a href="/codeup" >让我们开始吧</a>
-        </div>
+    <main class="container1">
+        <textarea id="code-input" rows="10" cols="50"></textarea>
+        <button onclick="runCode()">Run</button>
     </main>
 
     <footer>
