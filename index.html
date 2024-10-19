@@ -4,35 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>调调你的Python</title>
-    <link rel="icon" href="icon.jpg">
-    <link rel="stylesheet" href="css/index.css">
+    <title>视频播放系统</title>
+    <link rel="stylesheet" href="./CSS/styles.css">
 </head>
 
 <body>
-    <header class="navbar">
-        <h1>调调你的Python</h1>
-        <nav>
-            <a href="https://qiu-feng-piao-qi-huang-ye-lasorg.gitbook.io/transfer2python/">API说明</a>
-            <a href="/library">共享库</a>
-            <a href="/private-library">私人库</a>
-            <a href="/login">登录</a>
-            <a href="/register">注册</a>
-        </nav>
-    </header>
-    <main class="container">
-        <h2>欢迎来到调调你的Python</h2>
-        <h3>实现基于GET请求的Python代码调用</h3>
-        <p>通过给出链接+连接参数的形式调用此程序的API</p>
-        <p>实现用户私人库储存代码、共享库查看你所需要的代码</p>
-        <div class="box">
-            <a href="/codeup" >让我们开始吧</a>
+    <div class="navbar">
+        <button onclick="showVideo('p1')">嘉宾</button>
+        <button onclick="showVideo('p2')">全景</button>
+        <button onclick="showVideo('p3')">音频</button>
+    </div>
+    <div class="main-container">
+        <div class="video-container">
+            <video id="p1" class="video"
+                src="https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/23/68/26225476823/26225476823-1-192.mp4?e=ig8euxZM2rNcNbRznwdVhwdlhWh3hwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1729326939&gen=playurlv2&os=bdbv&oi=1866713016&trid=e1cda005f093499db06e670780dcc005O&mid=0&platform=html5&og=hw&upsig=4330fdd94ae61b0c943a5e719497d619&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&bvc=vod&nettype=1&orderid=0,3&buvid=&build=7330300&f=O_0_0&bw=138851&logo=80000000"
+                loop></video>
+            <video id="p2" class="video"
+                src="https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/79/94/26282429479/26282429479-1-192.mp4?e=ig8euxZM2rNcNbRz7wdVhwdlhWhMhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1729326980&gen=playurlv2&os=upos&oi=2584261250&trid=a996442ac47b4b22ac826a8b46e9ae3eO&mid=0&platform=html5&og=hw&upsig=736a3676210d466a516627d9f1a0e3c9&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&bvc=vod&nettype=1&orderid=0,3&buvid=&build=7330300&f=O_0_0&bw=134747&logo=80000000"
+                loop style="display: none;"></video>
+            <video id="p3" class="video"
+                src="https://cn-gddg-ct-01-22.bilivideo.com/upgcxcode/64/87/25968838764/25968838764-1-16.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1729327010&gen=playurlv2&os=bcache&oi=17621919&trid=00003f2bec7a6cbe4089b5c5c4aedb2fdf37h&mid=0&platform=html5&og=cos&upsig=2da3871f12671c105ab34f8932fe66f1&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform,og&cdnid=61322&bvc=vod&nettype=0&f=h_0_0&bw=38400&logo=80000000"
+                loop style="display: none;"></video>
         </div>
-    </main>
+        <div class="danmu-container">
+            <div id="danmu"></div>
+            <input type="text" id="danmuInput" placeholder="输入弹幕...">
+            <button id="sendDanmu">发送</button>
+        </div>
+    </div>
 
-    <footer>
-        <p>© 2022 调调你的Python. All rights reserved.</p>
-    </footer>
+    <script src="./JS/scripts.js"></script>
 </body>
 
 </html>
