@@ -1,4 +1,3 @@
-// JavaScript code
 let videosInitialized = false;
 
 function initializeVideos() {
@@ -29,36 +28,28 @@ function showVideo(videoId) {
 }
 
 function sendDanmu(danmuText) {
-    console.log('Attempting to send danmu:', danmuText);
-
     if (!danmuText || danmuText.trim() === '') {
-        console.warn('Attempted to send empty danmu');
         showFeedback('请输入弹幕内容！', 'warning');
         return;
     }
 
     const danmuContainer = document.getElementById('danmu');
     if (!danmuContainer) {
-        console.error('Danmu container not found');
         showFeedback('发送失败，请刷新页面重试。', 'error');
         return;
     }
 
     const danmuElement = document.createElement('div');
-    danmuElement.className = 'danmu-message';
+    danmuElement.className = 'danmu-message fade-in';
     danmuElement.textContent = danmuText;
-    danmuContainer.appendChild(danmuElement);
 
-    console.log('Danmu element created and inserted');
+    // 将新弹幕添加到容器顶部
+    danmuContainer.insertBefore(danmuElement, danmuContainer.firstChild);
 
-    setTimeout(() => {
-        danmuElement.style.transform = 'translateY(0)';
-        danmuElement.style.opacity = '1';
-        console.log('Danmu animation applied');
-    }, 10);
-
-    while (danmuContainer.children.length > 50) {
-        danmuContainer.removeChild(danmuContainer.firstChild);
+    // 如果弹幕数量超过限制，删除最早的弹幕
+    const maxDanmu = 50;
+    while (danmuContainer.children.length > maxDanmu) {
+        danmuContainer.removeChild(danmuContainer.lastChild);
     }
 
     showFeedback('弹幕发送成功！', 'success');
@@ -94,8 +85,6 @@ function showFeedback(message, type) {
 }
 
 function initializeDanmuInput() {
-    console.log('Initializing danmu input');
-
     const danmuInput = document.getElementById('danmuInput');
     const sendButton = document.getElementById('sendDanmu');
 
@@ -104,10 +93,7 @@ function initializeDanmuInput() {
         return;
     }
 
-    console.log('Danmu input elements found');
-
     function sendDanmuFromInput() {
-        console.log('sendDanmuFromInput called');
         const danmuText = danmuInput.value.trim();
         if (danmuText) {
             sendDanmu(danmuText);
@@ -118,26 +104,22 @@ function initializeDanmuInput() {
     }
 
     sendButton.addEventListener('click', (event) => {
-        console.log('Send button clicked');
         event.preventDefault();
         sendDanmuFromInput();
     });
 
     danmuInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
-            console.log('Enter key pressed');
             event.preventDefault();
             sendDanmuFromInput();
         }
     });
-
-    console.log('Event listeners added');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOMContentLoaded event fired');
     initializeDanmuInput();
     setInterval(generateRandomDanmu, 5000);
 });
 
+// 初始生成一条随机弹幕
 generateRandomDanmu();

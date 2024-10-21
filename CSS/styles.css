@@ -1,172 +1,224 @@
- /* CSS styles */
- body {
-     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-     background: url('../Media/bg.png') no-repeat center center fixed;
-     background-size: cover;
-     margin: 0;
-     padding: 0;
-     color: #333;
-     overflow: hidden;
-     line-height: 1.6;
- }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('../Media/bg.png') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    line-height: 1.6;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* 防止页面出现滚动条 */
+}
 
- .navbar {
-     background-color: rgba(0, 51, 102, 0.9);
-     padding: 15px 30px;
-     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-     display: flex;
-     justify-content: flex-start;
-     align-items: center;
-     position: fixed;
-     width: 100%;
-     top: 0;
-     z-index: 1000;
-     transition: all 0.3s ease;
- }
+.main-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
 
- .navbar button {
-     background-color: transparent;
-     color: white;
-     padding: 10px 20px;
-     margin: 0 15px;
-     border: 2px solid rgba(255, 255, 255, 0.6);
-     cursor: pointer;
-     font-size: 16px;
-     border-radius: 25px;
-     transition: all 0.3s ease;
- }
+.video-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    /* 防止视频部分出现滚动条 */
+}
 
- .navbar button:hover {
-     background-color: rgba(255, 255, 255, 0.2);
-     transform: translateY(-2px);
- }
+.video-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    margin: 10px;
+    overflow: hidden;
+}
 
- .main-container {
-     display: flex;
-     justify-content: space-between;
-     align-items: stretch;
-     height: 100vh;
-     padding-top: 60px;
-     box-sizing: border-box;
- }
+.video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 
- .video-container {
-     flex: 7;
-     height: calc(100vh - 60px);
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     background-color: rgba(0, 0, 0, 0.7);
-     padding: 20px;
-     border-radius: 10px;
-     margin: 10px;
- }
+.navbar {
+    background-color: rgba(0, 51, 102, 0.7);
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px 10px 10px;
+    border-radius: 10px;
+}
 
- .video {
-     width: 100%;
-     height: 100%;
-     object-fit: contain;
-     border-radius: 10px;
- }
+.navbar button {
+    background-color: transparent;
+    color: white;
+    padding: 10px 20px;
+    margin: 0 15px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
 
- .danmu-container {
-     flex: 3;
-     display: flex;
-     flex-direction: column;
-     justify-content: flex-start;
-     padding: 20px;
-     background-color: rgba(255, 255, 255, 0.9);
-     border-radius: 10px;
-     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-     margin: 10px;
-     max-width: 400px;
- }
+.navbar button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
 
- #danmu {
-     height: calc(100% - 100px);
-     border: 2px solid rgba(0, 51, 102, 0.8);
-     border-radius: 10px;
-     background-color: rgba(255, 255, 255, 0.8);
-     overflow: auto;
-     /* 修改此行 */
-     position: relative;
-     margin-bottom: 20px;
- }
+.danmu-container {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 10px 10px 10px 0;
+    overflow: hidden;
+    /* 防止弹幕容器出现滚动条 */
+}
 
- .danmu-message {
-     padding: 5px 10px;
-     background-color: rgba(255, 255, 255, 0.7);
-     border-radius: 15px;
-     margin-bottom: 5px;
-     transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-     transform: translateY(100%);
-     opacity: 0;
- }
+#danmu {
+    flex: 1;
+    border: 2px solid rgba(0, 51, 102, 0.8);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    overflow-y: auto;
+    position: relative;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+}
 
- #danmuInput {
-     width: 95%;
-     padding: 12px;
-     border: 2px solid rgba(0, 51, 102, 0.8);
-     border-radius: 25px;
-     font-size: 14px;
-     transition: all 0.3s ease;
- }
+.danmu-message {
+    padding: 5px 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
 
- #danmuInput:focus {
-     outline: none;
-     border-color: rgba(0, 102, 204, 0.8);
-     box-shadow: 0 0 10px rgba(0, 102, 204, 0.3);
- }
+.danmu-input-area {
+    flex-shrink: 0;
+    /* 防止输入区域被压缩 */
+}
 
- #sendDanmu {
-     background-color: rgba(0, 51, 102, 0.8);
-     color: white;
-     padding: 12px 25px;
-     border: none;
-     cursor: pointer;
-     font-size: 16px;
-     border-radius: 25px;
-     transition: all 0.3s ease;
-     margin-top: 15px;
-     align-self: flex-end;
- }
+#danmuInput {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid rgba(0, 51, 102, 0.8);
+    border-radius: 25px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
 
- #sendDanmu:hover {
-     background-color: rgba(0, 102, 204, 0.9);
-     transform: translateY(-2px);
-     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
- }
+#danmuInput:focus {
+    outline: none;
+    border-color: rgba(0, 102, 204, 0.8);
+    box-shadow: 0 0 10px rgba(0, 102, 204, 0.3);
+}
 
- @media (max-width: 1200px) {
-     .main-container {
-         flex-direction: column;
-     }
+#sendDanmu {
+    background-color: rgba(0, 51, 102, 0.8);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    align-self: flex-end;
+}
 
-     .video-container,
-     .danmu-container {
-         width: 100%;
-         max-width: none;
-     }
+#sendDanmu:hover {
+    background-color: rgba(0, 102, 204, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 
-     .video-container {
-         height: 60vh;
-     }
+/* 保留之前的 CSS 代码不变 */
 
-     .danmu-container {
-         height: 40vh;
-     }
- }
+/* 更新媒体查询部分 */
+@media (max-width: 1200px) {
+    .main-container {
+        flex-direction: column;
+    }
 
- .fade-in {
-     animation: fadeIn 0.5s ease-in-out;
- }
+    .video-section {
+        width: 100%;
+        flex: 0 0 60%;
+        /* 视频部分占据 60% 的高度 */
+    }
 
- @keyframes fadeIn {
-     from {
-         opacity: 0;
-     }
+    .danmu-container {
+        width: auto;
+        margin: 0 10px 10px 10px;
+        flex: 0 0 35%;
+        /* 弹幕部分占据 40% 的高度 */
+        max-height: 40vh;
+        /* 限制最大高度 */
+    }
 
-     to {
-         opacity: 1;
-     }
- }
+    #danmu {
+        flex: 1;
+        max-height: calc(100% - 100px);
+        /* 减去输入区域的高度 */
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+        /* 允许按钮换行 */
+        justify-content: center;
+        /* 居中对齐按钮 */
+    }
+
+    .navbar button {
+        margin: 5px;
+        /* 为按钮添加间距 */
+        flex: 0 1 auto;
+        /* 允许按钮根据内容调整大小 */
+        min-width: 80px;
+        /* 设置最小宽度，确保按钮不会太窄 */
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        padding: 10px 5px;
+        /* 减少内边距以节省空间 */
+    }
+
+    .navbar button {
+        padding: 8px 15px;
+        /* 稍微减小按钮的内边距 */
+        font-size: 14px;
+        /* 减小字体大小 */
+        min-width: 70px;
+        /* 进一步减小最小宽度 */
+    }
+}
+
+/* 保留其他 CSS 代码不变 */
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

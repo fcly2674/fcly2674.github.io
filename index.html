@@ -9,21 +9,23 @@
 </head>
 
 <body>
-    <div class="navbar">
-        <button onclick="showVideo('p1')">嘉宾</button>
-        <button onclick="showVideo('p2')">全景</button>
-        <button onclick="showVideo('p3')">音频</button>
-    </div>
     <div class="main-container">
-        <div class="video-container">
-            <video id="p1" class="video"
-                src="https://jx.91vrchat.com/bl/?url=https://www.bilibili.com/video/BV1XrC9YdEeo" loop></video>
-            <video id="p2" class="video"
-                src="https://jx.91vrchat.com/bl/?url=https://www.bilibili.com/video/BV1wVyYYJEXP" loop
-                style="display: none;"></video>
-            <video id="p3" class="video"
-                src="https://jx.91vrchat.com/bl/?url=https://www.bilibili.com/video/BV1Eqy8YKEtx" loop
-                style="display: none;"></video>
+        <div class="video-section">
+            <div class="video-container">
+                <video id="p1" class="video"
+                    src="https://jx.91vrchat.com/bl/?url=https://www.bilibili.com/video/BV1N8yeY4Exo" loop></video>
+                <video id="p2" class="video"
+                    src="https://jx.91vrchat.com/bl/?url=https://www.bilibili.com/video/BV1cm42137wh" loop
+                    style="display: none;"></video>
+                <video id="p3" class="video"
+                    src="https://jx.91vrchat.com/bl/?url=https://www.bilibili.com/video/BV1FJ2VYhEUA" loop
+                    style="display: none;"></video>
+            </div>
+            <div class="navbar">
+                <button onclick="showVideo('p1')">嘉宾</button>
+                <button onclick="showVideo('p2')">全景</button>
+                <button onclick="showVideo('p3')">音频</button>
+            </div>
         </div>
         <div class="danmu-container">
             <div id="danmu"></div>
@@ -31,7 +33,6 @@
             <button id="sendDanmu">发送</button>
         </div>
     </div>
-
     <script src="./JS/scripts.js"></script>
 </body>
 
