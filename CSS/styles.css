@@ -1,7 +1,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: url('https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1729506737888/%E8%A5%BF%E5%AE%89%E7%94%B5%E5%AD%90%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6%E5%8D%97%E6%A0%A1%E5%8C%BA_1_%E4%B8%8D%E5%8F%AF%E8%B4%9F%E5%8D%BF%E5%8D%BF%F0%9F%92%AB_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88.jpg') no-repeat center center fixed;
-    background-size: cover;
+    background: linear-gradient(to bottom right, #ffffff, #000000);
     margin: 0;
     padding: 0;
     color: #333;
@@ -10,22 +9,19 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    /* 防止页面出现滚动条 */
 }
 
 .main-container {
     display: flex;
-    flex: 1;
-    overflow: hidden;
+    flex-direction: column;
+    height: 100vh;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .video-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    overflow: hidden;
-    /* 防止视频部分出现滚动条 */
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 .video-container {
@@ -34,191 +30,269 @@ body {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
-    margin: 10px;
+    border-radius: 20px;
     overflow: hidden;
+    margin-bottom: 20px;
+    position: relative;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    width: 100%;
 }
 
-.video {
+#videoPlayer {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    border: none;
 }
 
 .navbar {
-    background-color: rgba(0, 51, 102, 0.7);
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 15px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin: 0 10px 10px 10px;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
-.navbar button {
-    background-color: transparent;
-    color: white;
-    padding: 10px 20px;
-    margin: 0 15px;
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-}
-
-.navbar button:hover {
+.nav-btn {
     background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-}
-
-.danmu-container {
-    width: 350px;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    margin: 10px 10px 10px 0;
-    overflow: hidden;
-    /* 防止弹幕容器出现滚动条 */
-}
-
-#danmu {
-    flex: 1;
-    border: 2px solid rgba(0, 51, 102, 0.8);
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
-    overflow-y: auto;
-    position: relative;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column-reverse;
-}
-
-.danmu-message {
-    padding: 5px 10px;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 15px;
-    margin-bottom: 5px;
-    transition: all 0.3s ease;
-}
-
-.danmu-input-area {
-    flex-shrink: 0;
-    /* 防止输入区域被压缩 */
-}
-
-#danmuInput {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid rgba(0, 51, 102, 0.8);
-    border-radius: 25px;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
-}
-
-#danmuInput:focus {
-    outline: none;
-    border-color: rgba(0, 102, 204, 0.8);
-    box-shadow: 0 0 10px rgba(0, 102, 204, 0.3);
-}
-
-#sendDanmu {
-    background-color: rgba(0, 51, 102, 0.8);
-    color: white;
-    padding: 12px 25px;
+    color: #333;
+    padding: 10px 20px;
+    margin: 5px;
     border: none;
     cursor: pointer;
     font-size: 16px;
     border-radius: 25px;
     transition: all 0.3s ease;
-    margin-top: 15px;
-    align-self: flex-end;
 }
 
-#sendDanmu:hover {
-    background-color: rgba(0, 102, 204, 0.9);
+.nav-btn:hover, .nav-btn.active {
+    background-color: rgba(255, 255, 255, 0.4);
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* 保留之前的 CSS 代码不变 */
+.info-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    overflow: hidden;
+}
 
-/* 更新媒体查询部分 */
+.info-nav {
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.info-btn {
+    background-color: transparent;
+    color: #333;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    border-radius: 15px;
+}
+
+.info-btn:hover, .info-btn.active {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.info-content {
+    display: none;
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+    position: relative;
+}
+
+.info-content.active {
+    display: flex;
+    flex-direction: column;
+}
+
+#commentList {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+#commentList p {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 10px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.comment-input {
+    display: flex;
+    position: sticky;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    margin: -10px 0 10px;
+}
+
+#commentInput {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+}
+
+#sendComment {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+#sendComment:hover {
+    background-color: #0056b3;
+}
+
+#schedule ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#schedule li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
+}
+
+#schedule .time {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+#intro p {
+    text-indent: 2em;
+    margin-bottom: 15px;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    border-radius: 15px;
+}
+
 @media (max-width: 1200px) {
     .main-container {
         flex-direction: column;
     }
 
-    .video-section {
+    .video-section, .info-section {
         width: 100%;
-        flex: 0 0 60%;
-        /* 视频部分占据 60% 的高度 */
-    }
-
-    .danmu-container {
-        width: auto;
-        margin: 0 10px 10px 10px;
-        flex: 0 0 35%;
-        /* 弹幕部分占据 40% 的高度 */
-        max-height: 40vh;
-        /* 限制最大高度 */
-    }
-
-    #danmu {
-        flex: 1;
-        max-height: calc(100% - 100px);
-        /* 减去输入区域的高度 */
-    }
-
-    .navbar {
-        flex-wrap: wrap;
-        /* 允许按钮换行 */
-        justify-content: center;
-        /* 居中对齐按钮 */
-    }
-
-    .navbar button {
-        margin: 5px;
-        /* 为按钮添加间距 */
-        flex: 0 1 auto;
-        /* 允许按钮根据内容调整大小 */
-        min-width: 80px;
-        /* 设置最小宽度，确保按钮不会太窄 */
+        margin-right: 0;
+        margin-bottom: 20px;
     }
 }
 
-@media (max-width: 600px) {
-    .navbar {
-        padding: 10px 5px;
-        /* 减少内边距以节省空间 */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
     }
 
-    .navbar button {
-        padding: 8px 15px;
-        /* 稍微减小按钮的内边距 */
+    .video-section {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .video-container {
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+    .navbar {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+        padding: 5px;
+    }
+
+    .nav-btn {
+        font-size: 12px;
+        padding: 6px 10px;
+        margin: 0;
+    }
+
+    .nav-btn:nth-child(4),
+    .nav-btn:nth-child(5) {
+        grid-column: span 1.5;
+    }
+
+    .info-nav {
+        padding: 5px;
+        justify-content: space-between;
+    }
+
+    .info-btn {
         font-size: 14px;
-        /* 减小字体大小 */
-        min-width: 70px;
-        /* 进一步减小最小宽度 */
+        padding: 6px 10px;
+    }
+
+    .info-section {
+        border-radius: 10px;
+    }
+
+    .info-content {
+        padding: 10px;
+    }
+
+    #commentInput {
+        font-size: 14px;
+    }
+
+    #sendComment {
+        font-size: 14px;
+        padding: 8px 16px;
     }
 }
 
-/* 保留其他 CSS 代码不变 */
-
-.fade-in {
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
+@media (max-width: 480px) {
+    .navbar {
+        flex-direction: column;
+        flex-wrap: wrap;
     }
 
-    to {
-        opacity: 1;
+    .nav-btn {
+        flex: 1 0 auto;
+        margin: 2px;
+    }
+
+    .info-nav {
+        flex-direction: row;
+    }
+
+    .info-btn {
+        flex: 1;
+        margin: 0 2px;
+    }
+
+    .comment-input {
+        flex-direction: column;
+    }
+
+    #commentInput {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    #sendComment {
+        width: 100%;
     }
 }
+
