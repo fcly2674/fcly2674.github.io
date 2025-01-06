@@ -1,39 +1,58 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>视频播放系统</title>
+    <title>广播节目《心灵驿站》</title>
     <link rel="stylesheet" href="./CSS/styles.css">
 </head>
-
 <body>
     <div class="main-container">
         <div class="video-section">
             <div class="video-container">
-                <video id="p1" class="video"
-                    src="https://jx.91vrchat.com/bl/?url=https://www.bilibili.com/video/BV1N8yeY4Exo" loop></video>
-                <video id="p2" class="video"
-                    src="https://jx.91vrchat.com/bl/?url=https://www.bilibili.com/video/BV1cm42137wh" loop
-                    style="display: none;"></video>
-                <video id="p3" class="video"
-                    src="https://jx.91vrchat.com/bl/?url=https://www.bilibili.com/video/BV1FJ2VYhEUA" loop
-                    style="display: none;"></video>
+                <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
             </div>
             <div class="navbar">
-                <button onclick="showVideo('p1')">嘉宾</button>
-                <button onclick="showVideo('p2')">全景</button>
-                <button onclick="showVideo('p3')">音频</button>
+                <button class="nav-btn active" data-url="https://bil.ouo.chat/player/?url=BV1nurMYNEpm&p=1">心灵驿站</button>
+                <button class="nav-btn" data-url="https://bil.ouo.chat/player/?url=BV1VzrTYREUn&p=1">理解代沟</button>
+                <button class="nav-btn" data-url="https://bil.ouo.chat/player/?url=BV1dvrTY4Edp&p=1">代沟涟漪</button>
+                <button class="nav-btn" data-url="https://bil.ouo.chat/player/?url=BV1VzrTYRE2b&p=1">代沟填平</button>
+                <button class="nav-btn" data-url="https://bil.ouo.chat/player/?url=BV1LBrTYxEEi&p=1">代际沟通</button>
+                <button class="nav-btn" data-url="https://bil.ouo.chat/player/?url=BV1vzrTYREMZ&p=1">课题分离</button>
             </div>
         </div>
-        <div class="danmu-container">
-            <div id="danmu"></div>
-            <input type="text" id="danmuInput" placeholder="输入弹幕...">
-            <button id="sendDanmu">发送</button>
+        <div class="info-section">
+            <div class="info-nav">
+                <button class="info-btn active" data-target="comments">评论</button>
+                <button class="info-btn" data-target="schedule">节目单</button>
+                <button class="info-btn" data-target="intro">简介</button>
+            </div>
+            <div id="comments" class="info-content active">
+                <div id="commentList"></div>
+                <div class="comment-input">
+                    <input type="text" id="commentInput" placeholder="输入评论...">
+                    <button id="sendComment">发送</button>
+                </div>
+            </div>
+            <div id="schedule" class="info-content">
+                <h3>节目单</h3>
+                <ul>
+                    <li><span class="time">0:00 - 13:50</span> 第一部分故事引入</li>
+                    <li><span class="time">13:51 - 16:24</span> 好歌放送 莫文蔚《盛夏的果实》</li>
+                    <li><span class="time">16:25 - 22:48</span> 第二部分权威解读</li>
+                    <li><span class="time">22:49 - 25:15</span> 好歌放送 毛不易《看得最远的地方》</li>
+                    <li><span class="time">25:16 - 42:59</span> 第三部分 听众来电</li>
+                </ul>
+            </div>
+            <div id="intro" class="info-content">
+                <h3>节目简介</h3>
+                <p>《心灵驿站》是一档由主持人与心理咨询师共同解读生活中热点问题的广播可视化节目，旨在为听众提供心理健康支持和实用建议。节目分为三个主要部分：故事引入、权威解读和听众来电。</p>
+                <p>在故事引入部分，通过生动的故事情节引发听众共鸣；权威解读环节中，心理咨询师从专业角度分析问题，并提供科学的解决策略；最后的听众来电环节，听众可以实时参与讨论，分享自己的困惑并获得专家的即时反馈。</p>
+                <p>整个节目穿插音乐和直播间实况，营造出温馨而互动的氛围。无论是面对学业压力、职场挑战还是人际关系困扰，《心灵驿站》都致力于帮助听众找到内心的平静与力量，成为大家心灵的港湾。</p>
+            </div>
         </div>
     </div>
     <script src="./JS/scripts.js"></script>
 </body>
-
 </html>
+
