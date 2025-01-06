@@ -1,125 +1,128 @@
-let videosInitialized = false;
+document.addEventListener('DOMContentLoaded', function() {
+    const videoPlayer = document.getElementById('videoPlayer');
+    const navBtns = document.querySelectorAll('.nav-btn');
+    const infoBtns = document.querySelectorAll('.info-btn');
+    const infoContents = document.querySelectorAll('.info-content');
+    const commentInput = document.getElementById('commentInput');
+    const sendComment = document.getElementById('sendComment');
+    const commentList = document.getElementById('commentList');
 
-function initializeVideos() {
-    const videos = document.querySelectorAll('.video');
-    videos.forEach(video => {
-        video.play().catch(error => {
-            console.error('Error playing video:', error);
+    // 预加载所有视频
+    const videoUrls = Array.from(navBtns).map(btn => btn.dataset.url);
+    let currentVideoIndex = 0;
+
+    function loadNextVideo() {
+        if (currentVideoIndex < videoUrls.length) {
+            const iframe = document.createElement('iframe');
+            iframe.src = videoUrls[currentVideoIndex];
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+            currentVideoIndex++;
+            setTimeout(loadNextVideo, 100); // 每100毫秒加载一个视频
+        }
+    }
+
+    loadNextVideo();
+
+    // 初始化视频播放器
+    function initializePlayer(url) {
+        videoPlayer.src = url;
+    }
+
+    // 切换视频
+    navBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            navBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            initializePlayer(this.dataset.url);
         });
     });
-    videosInitialized = true;
-}
 
-function showVideo(videoId) {
-    if (!videosInitialized) {
-        initializeVideos();
-    }
+    // 切换信息区域
+    infoBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            infoBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            infoContents.forEach(content => {
+                content.classList.remove('active');
+                if (content.id === this.dataset.target) {
+                    content.classList.add('active');
+                }
+            });
+        });
+    });
 
-    const videos = document.querySelectorAll('.video');
-    videos.forEach(video => {
-        if (video.id === videoId) {
-            video.style.display = 'block';
-            video.muted = false;
-        } else {
-            video.style.display = 'none';
-            video.muted = true;
+    // 发送评论
+    sendComment.addEventListener('click', function() {
+        const comment = commentInput.value.trim();
+        if (comment) {
+            addComment(comment);
+            commentInput.value = '';
         }
     });
-}
 
-function sendDanmu(danmuText) {
-    if (!danmuText || danmuText.trim() === '') {
-        showFeedback('请输入弹幕内容！', 'warning');
-        return;
+    // 添加评论
+    function addComment(text) {
+        const commentElement = document.createElement('p');
+        commentElement.textContent = text;
+        commentList.insertBefore(commentElement, commentList.firstChild);
     }
 
-    const danmuContainer = document.getElementById('danmu');
-    if (!danmuContainer) {
-        showFeedback('发送失败，请刷新页面重试。', 'error');
-        return;
-    }
-
-    const danmuElement = document.createElement('div');
-    danmuElement.className = 'danmu-message fade-in';
-    danmuElement.textContent = danmuText;
-
-    // 将新弹幕添加到容器顶部
-    danmuContainer.insertBefore(danmuElement, danmuContainer.firstChild);
-
-    // 如果弹幕数量超过限制，删除最早的弹幕
-    const maxDanmu = 50;
-    while (danmuContainer.children.length > maxDanmu) {
-        danmuContainer.removeChild(danmuContainer.lastChild);
-    }
-
-    showFeedback('弹幕发送成功！', 'success');
-}
-
-function generateRandomDanmu() {
+    // 随机生成评论
     const randomComments = [
-        '这真是太棒了！',
-        '我喜欢这个视频！',
-        '哈哈哈，笑死我了！',
-        '这是什么鬼？',
-        '太有趣了！',
-        '我也想试试！'
+        "这期节目太棒了！",
+        "主持人说得真好，很有共鸣。",
+        "终于明白为什么会有代沟了。",
+        "希望能多做一些类似的节目。",
+        "这个观点我完全同意！",
+        "感谢节目组的用心制作。",
+        "学到了很多，谢谢分享！",
+        "这个话题真的很有意义。",
+        "期待下一期的内容。",
+        "每次听都有新的收获。"
     ];
-    const randomIndex = Math.floor(Math.random() * randomComments.length);
-    sendDanmu(randomComments[randomIndex]);
-}
 
-function showFeedback(message, type) {
-    const feedbackElement = document.getElementById('feedback');
-    if (!feedbackElement) {
-        console.error('Feedback element not found');
-        return;
+    function generateRandomComment() {
+        const randomIndex = Math.floor(Math.random() * randomComments.length);
+        addComment(randomComments[randomIndex]);
     }
 
-    feedbackElement.textContent = message;
-    feedbackElement.className = `feedback ${type}`;
-    feedbackElement.style.display = 'block';
+    // 每3秒生成一条随机评论
+    setInterval(generateRandomComment, 3000);
 
-    setTimeout(() => {
-        feedbackElement.style.display = 'none';
-    }, 3000);
-}
+    // 初始化第一个视频
+    initializePlayer(navBtns[0].dataset.url);
 
-function initializeDanmuInput() {
-    const danmuInput = document.getElementById('danmuInput');
-    const sendButton = document.getElementById('sendDanmu');
-
-    if (!danmuInput || !sendButton) {
-        console.error('Danmu input elements not found');
-        return;
+    // 调整视频容器大小
+    function resizeVideoContainer() {
+        const videoContainer = document.querySelector('.video-container');
+        const aspectRatio = 16 / 9;
+        const containerWidth = videoContainer.offsetWidth;
+        const containerHeight = containerWidth / aspectRatio;
+        videoContainer.style.paddingTop = `${containerHeight}px`;
     }
 
-    function sendDanmuFromInput() {
-        const danmuText = danmuInput.value.trim();
-        if (danmuText) {
-            sendDanmu(danmuText);
-            danmuInput.value = '';
+    // 页面加载和调整大小时调整视频容器
+    window.addEventListener('load', resizeVideoContainer);
+    window.addEventListener('resize', resizeVideoContainer);
+
+    // 优化移动端布局
+    function optimizeMobileLayout() {
+        const isMobile = window.innerWidth <= 768;
+        const navbar = document.querySelector('.navbar');
+        const infoNav = document.querySelector('.info-nav');
+
+        if (isMobile) {
+            navbar.classList.add('mobile');
+            infoNav.classList.add('mobile');
         } else {
-            showFeedback('请输入弹幕内容！', 'warning');
+            navbar.classList.remove('mobile');
+            infoNav.classList.remove('mobile');
         }
     }
 
-    sendButton.addEventListener('click', (event) => {
-        event.preventDefault();
-        sendDanmuFromInput();
-    });
-
-    danmuInput.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            sendDanmuFromInput();
-        }
-    });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    initializeDanmuInput();
-    setInterval(generateRandomDanmu, 5000);
+    // 页面加载和调整大小时优化移动端布局
+    window.addEventListener('load', optimizeMobileLayout);
+    window.addEventListener('resize', optimizeMobileLayout);
 });
 
-// 初始生成一条随机弹幕
-generateRandomDanmu();
